@@ -1,5 +1,5 @@
 import { AppDispatch } from '../../store';
-import { getBeers } from '../../../service/beerApi';
+import { getBeerDetail, getBeers } from '../../../service/beerApi';
 import { GetParams } from '../../../modules/service';
 
 import { beersSlice } from './BeersSlice';
@@ -10,6 +10,17 @@ export const fetchBeers = (params: GetParams) => (dispatch: AppDispatch) => {
 		(async () => {
 			const fetch = await getBeers(params);
 			if (fetch) dispatch(beersSlice.actions.beersFetchingSuccess(fetch.data));
+		})();
+	} catch (e) {
+		dispatch(beersSlice.actions.beersFetchingError('fetching error'));
+	}
+};
+export const fetchBeerDetails = (id: number) => (dispatch: AppDispatch) => {
+	try {
+		dispatch(beersSlice.actions.beersFetching());
+		(async () => {
+			const fetch = await getBeerDetail(id);
+			if (fetch) dispatch(beersSlice.actions.beerDetailsFetchingSuccess(fetch.data[0]));
 		})();
 	} catch (e) {
 		dispatch(beersSlice.actions.beersFetchingError('fetching error'));

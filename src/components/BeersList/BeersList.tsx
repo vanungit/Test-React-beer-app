@@ -11,9 +11,9 @@ interface Props {
 	element: any;
 }
 
-export const BeersList: React.FC<Props> = ({ element }) => {
+const BeersList: React.FC<Props> = ({ element }) => {
 	return (
-		<Content key={`beer${element.index}`} className={styles.beerElementDiv}>
+		<Content data-testid={'beers-item'} key={`beer${element.index}`} className={styles.beerElementDiv}>
 			<div className={styles.beerImage}>
 				<img src={element.image_url} alt='Beer' />
 			</div>
@@ -29,4 +29,4 @@ export const BeersList: React.FC<Props> = ({ element }) => {
 		</Content>
 	);
 };
-export default BeersList;
+export default React.memo(BeersList);

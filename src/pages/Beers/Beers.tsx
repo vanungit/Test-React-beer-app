@@ -10,6 +10,8 @@ import BeersList from '../../components/BeersList/BeersList';
 import { GetParams } from '../../modules/service';
 import { FiltersValue } from '../../modules/filters';
 
+import { getBeersSelector } from '../../store/reducers/selectors/getBeers';
+
 import styles from './Beers.module.scss';
 
 const { Content } = Layout;
@@ -21,7 +23,7 @@ export const Beers = () => {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [showFilters, setShowFilters] = useState<boolean>(false);
 
-	const { beers, allBeersLength, isLoading } = useAppSelector((state) => state.beersReducer);
+	const { beers, allBeersLength, isLoading } = useAppSelector(getBeersSelector);
 
 	const [params, setParams] = useState<GetParams>({
 		beer_name: '',
@@ -63,17 +65,20 @@ export const Beers = () => {
 		<Layout data-testid='beers-page'>
 			<div className={styles.mainPage}>
 				<Content key='search-content'>
-					<Search className={styles.searchName} placeholder='name here' onSearch={handleSearch} />
-					<Button onClick={handleShow} style={{ marginTop: '4px' }}>
+					<Search data-testid='search-input' className={styles.searchName} placeholder='Name here' onSearch={handleSearch} />
+					<Button data-testid='toggle-btn' name='toggle' onClick={handleShow} style={{ marginTop: '4px' }}>
 						<FilterOutlined />
 					</Button>
 				</Content>
 
-				{showFilters && <Filters onSubmitForm={onSubmitForm} />}
-				<div className={styles.buttons}></div>
+				{showFilters && (
+					<div data-testid='toggle-filters'>
+						<Filters onSubmitForm={onSubmitForm} />
+					</div>
+				)}
 				{isLoading && <div className={styles.loading}>Loading... </div>}
 
-				<Content key='beers-list-content' className={styles.listContainer}>
+				<Content className={styles.listContainer}>
 					{beers.map((element: any, index: number) => (
 						<BeersList element={element} key={index} />
 					))}

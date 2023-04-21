@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Layout } from 'antd';
 
-import { getBeers } from '../../service/beerApi';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchBeerDetails } from '../../store/reducers/beers/ActionCreators';
+
+import { getBeersSelector } from '../../store/reducers/selectors/getBeers';
 
 import styles from './DetailsPage.module.scss';
 
 const { Content } = Layout;
 
 export const DetailsPage = () => {
+	const dispatch = useAppDispatch();
 	const beerId: number = Number(useParams<{ id?: string }>().id);
-	const [beer, setBeer] = useState<any>(null);
+	const { beerDetails: beer, isLoading } = useAppSelector(getBeersSelector);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const fetchedData = await getBeers(beerId);
-			return fetchedData;
-		};
-		fetchData().then((res: any) => {
-			setBeer(res.data[0]);
-		});
-	}, [beerId]);
+		dispatch(fetchBeerDetails(beerId));
+	}, [dispatch, beerId]);
 
 	return (
 		<Layout data-testid='beers-details-page' className={styles.beerList}>
+			{isLoading && <div className={styles.loading}>Loading... </div>}
+
 			<Content className={styles.detailsPage}>
 				{beer === null && <div>Loading...</div>}
 				<div className={styles.detailsBlock}>{beer && <img className={styles.detailsImg} src={beer.image_url} alt='Beer' />}</div>

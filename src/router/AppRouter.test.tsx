@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import App from '../App';
 
-import { renderWithStore } from '../helpers/renderWidthStore';
+import { renderWithStore } from '../helpers/renderWithStoreHelpers/renderWidthStore';
 
 describe('testing routes', () => {
 	it('testing beers wrong', () => {

@@ -2,14 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Beers } from '../../../modules/beers';
 
-interface InitialState {
+export interface InitialState {
 	beers: Beers[];
+	beerDetails: Beers | null;
 	allBeersLength: number;
 	isLoading: boolean;
 	error: string;
 }
-const initialState: InitialState = {
+export const initialState: InitialState = {
 	beers: [],
+	beerDetails: null,
 	allBeersLength: 0,
 	isLoading: false,
 	error: '',
@@ -25,6 +27,10 @@ export const beersSlice = createSlice({
 			state.beers = action.payload;
 			state.isLoading = false;
 		},
+		beerDetailsFetchingSuccess(state, action: PayloadAction<Beers>) {
+			state.beerDetails = action.payload;
+			state.isLoading = false;
+		},
 		allBeersLengthFetchingSuccess(state, action: PayloadAction<number>) {
 			state.allBeersLength = action.payload;
 			state.isLoading = false;
@@ -36,5 +42,7 @@ export const beersSlice = createSlice({
 		},
 	},
 });
+
+export const { beersFetching, allBeersLengthFetchingSuccess, beersFetchingError } = beersSlice.actions;
 
 export default beersSlice.reducer;
