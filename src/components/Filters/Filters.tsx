@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, DatePicker, Form, InputNumber, Space } from 'antd';
 
-import { FiltersValue } from '../../modules/filters';
+import { IFiltersValue } from '../../modules/filters';
 
 interface Props {
-	onSubmitForm(values: FiltersValue): void;
+	onSubmitForm(values: IFiltersValue): void;
 }
 const Filters: React.FC<Props> = ({ onSubmitForm }) => {
-	const onFinish = (values: FiltersValue) => onSubmitForm(values);
+	const onFinish = (values: IFiltersValue) => onSubmitForm(values);
 
 	return (
 		<>

@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Route, Redirect } from 'react-router-dom';
 
-import { Beers } from '../pages/Beers/Beers';
-import { DetailsPage } from '../pages/DetailsPage/DetailsPage';
+import { Beers, DetailsPage } from '../pages';
 
 interface IRoutes {
 	path: string;

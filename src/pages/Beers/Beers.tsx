@@ -7,8 +7,8 @@ import Filters from '../../components/Filters/Filters';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchAllBeersLength, fetchBeers } from '../../store/reducers/beers/ActionCreators';
 import BeersList from '../../components/BeersList/BeersList';
-import { GetParams } from '../../modules/service';
-import { FiltersValue } from '../../modules/filters';
+import { IGetParams } from '../../modules/service';
+import { IFiltersValue } from '../../modules/filters';
 
 import { getBeersSelector } from '../../store/reducers/selectors/getBeers';
 
@@ -25,7 +25,7 @@ export const Beers = () => {
 
 	const { beers, allBeersLength, isLoading } = useAppSelector(getBeersSelector);
 
-	const [params, setParams] = useState<GetParams>({
+	const [params, setParams] = useState<IGetParams>({
 		beer_name: '',
 		page: 1,
 		per_page: 10,
@@ -39,14 +39,14 @@ export const Beers = () => {
 	}, [params, dispatch]);
 
 	const handleSearch = useCallback((name: string) => {
-		setParams((prev: GetParams) => {
+		setParams((prev: IGetParams) => {
 			return { ...prev, beer_name: name, brewed_before: null, abv_gt: null };
 		});
 		setShowFilters(false);
 	}, []);
 
 	const setPagination = useCallback((value: number) => {
-		setParams((prev: GetParams) => {
+		setParams((prev: IGetParams) => {
 			return { ...prev, page: value };
 		});
 		setCurrentPage(value);
@@ -54,9 +54,9 @@ export const Beers = () => {
 
 	const handleShow = useCallback(() => setShowFilters((prev) => !prev), []);
 
-	const onSubmitForm = useCallback((values: FiltersValue) => {
+	const onSubmitForm = useCallback((values: IFiltersValue) => {
 		const result = { ...values, brewed_before: moment(values.brewed_before).format('MM-YYYY') };
-		setParams((prev: GetParams) => {
+		setParams((prev: IGetParams) => {
 			return { ...prev, ...result };
 		});
 	}, []);

@@ -1,6 +1,6 @@
-import { GetParams } from '../../modules/service';
+import { IGetParams } from '../../modules/service';
 
-export function getParams(obj: GetParams) {
+export function getParams(obj: IGetParams) {
 	const result = [];
 	let isFirst = true;
 	for (const i in obj) {

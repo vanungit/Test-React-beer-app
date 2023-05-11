@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Beers } from '../../../modules/beers';
+import { IBeers } from '../../../modules/beers';
 
 export interface InitialState {
-	beers: Beers[];
-	beerDetails: Beers | null;
+	beers: IBeers[];
+	beerDetails: IBeers | null;
 	allBeersLength: number;
 	isLoading: boolean;
 	error: string;
@@ -23,11 +23,11 @@ export const beersSlice = createSlice({
 		beersFetching(state) {
 			state.isLoading = true;
 		},
-		beersFetchingSuccess(state, action: PayloadAction<Beers[]>) {
+		beersFetchingSuccess(state, action: PayloadAction<IBeers[]>) {
 			state.beers = action.payload;
 			state.isLoading = false;
 		},
-		beerDetailsFetchingSuccess(state, action: PayloadAction<Beers>) {
+		beerDetailsFetchingSuccess(state, action: PayloadAction<IBeers>) {
 			state.beerDetails = action.payload;
 			state.isLoading = false;
 		},

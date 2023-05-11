@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { GetParams } from '../modules/service';
-import { getParams } from '../helpers/serviceHelpers/service.helpers';
+import { IGetParams } from '../modules/service';
+import { getParams } from '../helpers';
 export const apiUrl = 'https://api.punkapi.com/v2';
 
-export const getBeers = async (params: GetParams) => {
+export const getBeers = async (params: IGetParams) => {
 	try {
 		const fetchParams = getParams(params);
 		return await axios.get(`${apiUrl}/beers/${fetchParams}`);

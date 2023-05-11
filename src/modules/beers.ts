@@ -1,4 +1,4 @@
-export interface Beers {
+export interface IBeers {
 	id: number;
 	name: string;
 	tagline: string;

@@ -1,4 +1,4 @@
-import { Beers } from '../../modules/beers';
+import { IBeers } from '../../modules/beers';
 import { apiUrl, getBeerDetail } from '../../service/beerApi';
 import { testExample } from '../../utils/test.utils';
 
@@ -7,7 +7,7 @@ const axios = require('axios');
 jest.mock('axios');
 
 describe('testing Details Page', () => {
-	let response: Beers;
+	let response: IBeers;
 	beforeEach(() => {
 		response = testExample;
 	});

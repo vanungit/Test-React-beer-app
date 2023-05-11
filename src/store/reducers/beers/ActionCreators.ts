@@ -1,10 +1,10 @@
 import { AppDispatch } from '../../store';
 import { getBeerDetail, getBeers } from '../../../service/beerApi';
-import { GetParams } from '../../../modules/service';
+import { IGetParams } from '../../../modules/service';
 
 import { beersSlice } from './BeersSlice';
 
-export const fetchBeers = (params: GetParams) => (dispatch: AppDispatch) => {
+export const fetchBeers = (params: IGetParams) => (dispatch: AppDispatch) => {
 	try {
 		dispatch(beersSlice.actions.beersFetching());
 		(async () => {
@@ -26,7 +26,7 @@ export const fetchBeerDetails = (id: number) => (dispatch: AppDispatch) => {
 		dispatch(beersSlice.actions.beersFetchingError('fetching error'));
 	}
 };
-export const fetchAllBeersLength = (params: GetParams) => (dispatch: AppDispatch) => {
+export const fetchAllBeersLength = (params: IGetParams) => (dispatch: AppDispatch) => {
 	try {
 		dispatch(beersSlice.actions.beersFetching());
 		(async () => {
