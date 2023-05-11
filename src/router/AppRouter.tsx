@@ -1,23 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import { Beers } from '../pages/Beers/Beers';
-import { DetailsPage } from '../pages/DetailsPage/DetailsPage';
+import { routes } from '../constants/RoutesData';
 
 const AppRouter = () => {
 	return (
 		<>
 			<Router>
 				<Switch>
-					<Route path='/beers' exact>
-						<Beers />
-					</Route>
-					<Route path='/beers/:id' exact>
-						<DetailsPage />
-					</Route>
-					<Route exact path='*'>
-						<Redirect to='/beers' />
-					</Route>
+					{routes.map((route, index) => {
+						return (
+							<Route key={index} path={route.path} exact={route.exact}>
+								{route.component}
+							</Route>
+						);
+					})}
 				</Switch>
 			</Router>
 		</>

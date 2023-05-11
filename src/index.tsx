@@ -6,7 +6,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
 import { setupStore } from './store/store';
 
 const store = setupStore();
@@ -17,7 +16,7 @@ root.render(
 		<Provider store={store}>
 			<App />
 		</Provider>
-	</React.StrictMode>,
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
