@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Layout } from 'antd';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchBeerDetails } from '../../store/reducers/beers/BeersActionCreators';
 
 import { getBeersSelector } from '../../store/reducers/selectors/getBeers';
