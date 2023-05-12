@@ -7,7 +7,7 @@ export const apiUrl = 'https://api.punkapi.com/v2';
 export const getBeers = async (params: IGetParams) => {
 	try {
 		const fetchParams = getParams(params);
-		return await axios.get(`${apiUrl}/beers/${fetchParams}`);
+		return await axios.get(`${apiUrl}/beers/`, { params: fetchParams });
 	} catch (e) {
 		// console.log('Fetching error');
 	}

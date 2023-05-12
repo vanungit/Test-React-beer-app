@@ -14,9 +14,9 @@ const Filters: React.FC<Props> = ({ onSubmitForm }) => {
 			<Form name='complex-form' onFinish={onFinish} labelCol={{ span: 4 }} wrapperCol={{ span: 16 }} style={{ maxWidth: 650, marginTop: 15 }}>
 				<h2>Filters</h2>
 
-				<Form.Item label='Abv_gt'>
+				<Form.Item label='Hard Komb %'>
 					<Space>
-						<Form.Item name='abv_gt' noStyle rules={[{ required: true, message: 'Abv_gt is required' }]}>
+						<Form.Item name='abv_gt' noStyle>
 							<InputNumber style={{ width: 255 }} min={1} max={20} />
 						</Form.Item>
 					</Space>
@@ -24,7 +24,7 @@ const Filters: React.FC<Props> = ({ onSubmitForm }) => {
 
 				<Form.Item label='Brewed before'>
 					<Space>
-						<Form.Item name='brewed_before' noStyle rules={[{ required: true, message: 'Brewed before is required' }]}>
+						<Form.Item name='brewed_before' noStyle>
 							<DatePicker style={{ width: 255 }} />
 						</Form.Item>
 					</Space>
