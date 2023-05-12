@@ -6,7 +6,7 @@ import { Beers, DetailsPage } from '../pages';
 interface IRoutes {
 	path: string;
 	exact: boolean;
-	component: any;
+	component: JSX.Element;
 }
 
 export const routes: IRoutes[] = [

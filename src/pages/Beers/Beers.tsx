@@ -5,12 +5,14 @@ import moment from 'moment';
 
 import Filters from '../../components/Filters/Filters';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchAllBeersLength, fetchBeers } from '../../store/reducers/beers/ActionCreators';
+import { fetchAllBeersLength, fetchBeers } from '../../store/reducers/beers/BeersActionCreators';
 import BeersList from '../../components/BeersList/BeersList';
 import { IGetParams } from '../../modules/service';
 import { IFiltersValue } from '../../modules/filters';
 
 import { getBeersSelector } from '../../store/reducers/selectors/getBeers';
+
+import { IBeers } from '../../modules/beers';
 
 import styles from './Beers.module.scss';
 
@@ -52,7 +54,7 @@ export const Beers = () => {
 		setCurrentPage(value);
 	}, []);
 
-	const handleShow = useCallback(() => setShowFilters((prev) => !prev), []);
+	const handleShow = useCallback(() => setShowFilters(prev => !prev), []);
 
 	const onSubmitForm = useCallback((values: IFiltersValue) => {
 		const result = { ...values, brewed_before: moment(values.brewed_before).format('MM-YYYY') };
@@ -79,7 +81,7 @@ export const Beers = () => {
 				{isLoading && <div className={styles.loading}>Loading... </div>}
 
 				<Content className={styles.listContainer}>
-					{beers.map((element: any, index: number) => (
+					{beers.map((element: IBeers, index: number) => (
 						<BeersList element={element} key={index} />
 					))}
 				</Content>
