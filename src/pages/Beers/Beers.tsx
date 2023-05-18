@@ -13,6 +13,8 @@ import { IBeers } from '../../modules/beers';
 
 import { useSearchParams } from '../../hooks/useSearchParams';
 
+import { Btn } from '../../components';
+
 import styles from './Beers.module.scss';
 
 const { Content } = Layout;
@@ -34,9 +36,9 @@ export const Beers = () => {
 			<div className={styles.mainPage}>
 				<Content key='search-content'>
 					<Search data-testid='search-input' className={styles.searchName} placeholder='Name here' onSearch={handleSearch} />
-					<Button data-testid='toggle-btn' name='toggle' onClick={handleShow} style={{ marginTop: '4px' }}>
+					<Btn data-testid='search-input' style={{ marginTop: '4px' }} onClick={handleShow} className={styles.searchName}>
 						<FilterOutlined />
-					</Button>
+					</Btn>
 				</Content>
 
 				{showFilters && (

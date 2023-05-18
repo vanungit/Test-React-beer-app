@@ -1,2 +1,2 @@
 export { Beers } from './Beers/Beers';
-export { DetailsPage } from './DetailsPage/DetailsPage';
+export { default as DetailsPage } from './DetailsPage/DetailsPage';

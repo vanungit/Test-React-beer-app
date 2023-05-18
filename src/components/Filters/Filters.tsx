@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, DatePicker, Form, InputNumber, Space } from 'antd';
 
 import { IFiltersValue } from '../../modules/filters';
+import Btn from '../Btn/Btn';
 
 interface Props {
 	onSubmitForm(values: IFiltersValue): void;
@@ -31,9 +32,9 @@ const Filters: React.FC<Props> = ({ onSubmitForm }) => {
 				</Form.Item>
 
 				<Form.Item label=' ' colon={false}>
-					<Button type='primary' htmlType='submit'>
+					<Btn type='primary' htmlType='submit'>
 						Search
-					</Button>
+					</Btn>
 				</Form.Item>
 			</Form>
 		</>

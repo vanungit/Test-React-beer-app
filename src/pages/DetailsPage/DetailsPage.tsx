@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { Redirect, useHistory, useParams } from 'react-router';
 import { Layout } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
@@ -11,8 +11,9 @@ import styles from './DetailsPage.module.scss';
 
 const { Content } = Layout;
 
-export const DetailsPage = () => {
+const DetailsPage = () => {
 	const dispatch = useAppDispatch();
+	const history = useHistory();
 	const beerId: number = Number(useParams<{ id?: string }>().id);
 	const { beerDetails: beer, isLoading } = useAppSelector(getBeersSelector);
 
@@ -20,21 +21,25 @@ export const DetailsPage = () => {
 		dispatch(fetchBeerDetails(beerId));
 	}, [dispatch, beerId]);
 
+	if (!beer) {
+		history.push('/not-found');
+	}
 	return (
-		<Layout data-testid='beers-details-page' className={styles.beerList}>
-			{isLoading && <div className={styles.loading}>Loading... </div>}
-
-			<Content className={styles.detailsPage}>
-				{beer === null && <div>Loading...</div>}
-				<div className={styles.detailsBlock}>{beer && <img className={styles.detailsImg} src={beer.image_url} alt='Beer' />}</div>
-				<div className={styles.detailsBlock}>
-					<h1>{beer && beer.name} </h1>
-					<p>{beer && beer.first_brewed}</p>
-					<p>{beer && beer.ibu}</p>
-					<p>{beer && beer.abv}</p>
-					<p>{beer && beer.description}</p>
-				</div>
-			</Content>
-		</Layout>
+		beer && (
+			<Layout data-testid='beers-details-page' className={styles.beerList}>
+				<Content className={styles.detailsPage}>
+					<div className={styles.detailsBlock}>{<img className={styles.detailsImg} src={beer.image_url} alt='Beer' />}</div>
+					<div className={styles.detailsBlock}>
+						<h1>{beer.name} </h1>
+						<p>{beer.first_brewed}</p>
+						<p>{beer.ibu}</p>
+						<p>{beer.abv}</p>
+						<p>{beer.description}</p>
+					</div>
+				</Content>
+			</Layout>
+		)
 	);
 };
+
+export default DetailsPage;
