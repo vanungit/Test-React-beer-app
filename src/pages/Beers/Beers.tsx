@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Pagination, Input, Layout, Button } from 'antd';
+import React, { useEffect } from 'react';
+import { Pagination, Layout } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 
-import Filters from '../../components/Filters/Filters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchAllBeersLength, fetchBeers } from '../../store/reducers/beers/BeersActionCreators';
 import BeersList from '../../components/BeersList/BeersList';
@@ -13,16 +12,15 @@ import { IBeers } from '../../modules/beers';
 
 import { useSearchParams } from '../../hooks/useSearchParams';
 
-import { Btn } from '../../components';
+import { Btn, ConnectedForm, SearchC } from '../../components';
 
 import styles from './Beers.module.scss';
 
 const { Content } = Layout;
-const { Search } = Input;
 
 export const Beers = () => {
 	const dispatch = useAppDispatch();
-	const { handleSearch, handleShow, onSubmitForm, setPagination, showFilters, currentPage, params } = useSearchParams();
+	const { handleSearch, handleShow, setParams, setPagination, showFilters, currentPage, params } = useSearchParams();
 
 	const { beers, allBeersLength, isLoading } = useAppSelector(getBeersSelector);
 
@@ -32,22 +30,16 @@ export const Beers = () => {
 	}, [params, dispatch]);
 
 	return (
-		<Layout data-testid='beers-page'>
+		<>
 			<div className={styles.mainPage}>
 				<Content key='search-content'>
-					<Search data-testid='search-input' className={styles.searchName} placeholder='Name here' onSearch={handleSearch} />
+					<SearchC data-testid='search-input' handleSearch={handleSearch} searchClass={styles.searchName} />
 					<Btn data-testid='search-input' style={{ marginTop: '4px' }} onClick={handleShow} className={styles.searchName}>
 						<FilterOutlined />
 					</Btn>
 				</Content>
-
-				{showFilters && (
-					<div data-testid='toggle-filters'>
-						<Filters onSubmitForm={onSubmitForm} />
-					</div>
-				)}
+				<ConnectedForm dataTestid='toggle-filters' showFilters={showFilters} setParams={setParams} />
 				{isLoading && <div className={styles.loading}>Loading... </div>}
-
 				<Content className={styles.listContainer}>
 					{beers.map((element: IBeers, index: number) => (
 						<BeersList element={element} key={index} />
@@ -55,6 +47,6 @@ export const Beers = () => {
 				</Content>
 				{allBeersLength >= 1 && <Pagination onChange={setPagination} current={currentPage} defaultCurrent={1} total={allBeersLength - 1} />}
 			</div>
-		</Layout>
+		</>
 	);
 };

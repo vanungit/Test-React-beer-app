@@ -1,12 +1,14 @@
 $paddingButton: 5px;
+
 @mixin buttonStyles {
-	padding: $paddingButton;
+	padding   : $paddingButton;
 	text-align: center;
-	border: 1px solid black;
-	width: 100px;
+	border    : 1px solid black;
+	width     : 100px;
+
 	&:hover {
 		background-color: lightgreen;
-		cursor: pointer;
+		cursor          : pointer;
 	}
 }
 
@@ -15,21 +17,22 @@ $paddingButton: 5px;
 }
 
 .buttons {
-	display: flex;
+	display        : flex;
 	justify-content: space-between;
 }
 
 .searchName {
 	margin: 5px 0;
-	width: 300px;
+	width : 300px;
 }
 
 .loading {
-	margin: 10px auto;
+	margin    : 10px auto;
 	text-align: center;
 }
+
 .listContainer {
-	display: flex;
+	display  : flex;
 	flex-wrap: wrap;
 }
 
@@ -44,25 +47,42 @@ $paddingButton: 5px;
 }
 
 .personElementDiv {
-	display: flex;
-	padding: 5px;
-	border: solid 1px black;
+	display      : flex;
+	padding      : 5px;
+	border       : solid 1px black;
 	border-radius: 10px;
-	margin: 20px 0;
+	margin       : 20px 0;
 
 	.personImage {
 		text-align: center;
-		margin: auto;
-		width: 100px;
+		margin    : auto;
+		width     : 100px;
 	}
+
 	.text {
-		max-width: 60%;
+		max-width : 60%;
 		text-align: left;
 	}
+
 	.arrow {
-		text-align: right;
-		margin: auto;
+		text-align  : right;
+		margin      : auto;
 		margin-right: 20px;
-		font-size: 105px;
+		font-size   : 105px;
 	}
+}
+
+.box {
+	background-color: rgb(55, 55, 110);
+	color           : white;
+	padding         : 20px;
+	border-radius   : .5em;
+}
+
+.example1 {
+	margin: 50px 0 50px 0;
+}
+
+.example2 {
+	margin: 20px 0 20px 0;
 }
