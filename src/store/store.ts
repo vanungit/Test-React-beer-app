@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import beersReducer from './reducers/beers/BeersSlice';
+import { beersReducer } from './reducers/beers/BeersSlice';
 
 const rootReducer = combineReducers({
 	beersReducer,
@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 export const setupStore = () => {
 	return configureStore({
 		reducer: rootReducer,
-		middleware: (getDefaultMiddleware) => getDefaultMiddleware({ immutableCheck: false, serializableCheck: false }),
+		middleware: getDefaultMiddleware => getDefaultMiddleware({ immutableCheck: false, serializableCheck: false }),
 	});
 };
 

@@ -15,11 +15,13 @@ interface FilterProps {
 
 export const ConnectedForm = (props: FilterProps) => {
 	const { showFilters, dataTestid, setParams } = props;
+
 	const onSubmitForm = useCallback((values: filters.IFiltersValue) => {
 		const result = { ...values, brewed_before: moment(values.brewed_before).format('MM-YYYY') };
 		setParams((prev: IGetParams) => {
 			return { ...prev, ...result };
 		});
 	}, []);
+
 	return showFilters ? <Filters dataTestid={dataTestid} onSubmitForm={onSubmitForm} /> : <></>;
 };

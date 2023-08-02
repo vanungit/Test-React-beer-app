@@ -31,10 +31,10 @@ export const Beers = () => {
 
 	return (
 		<>
-			<div className={styles.mainPage}>
+			<div className={styles.mainPage} data-testid='beers-page'>
 				<Content key='search-content'>
 					<SearchC data-testid='search-input' handleSearch={handleSearch} searchClass={styles.searchName} />
-					<Btn data-testid='search-input' style={{ marginTop: '4px' }} onClick={handleShow} className={styles.searchName}>
+					<Btn data-testid='toggle-btn' style={{ marginTop: '4px' }} onClick={handleShow} className={styles.searchName}>
 						<FilterOutlined />
 					</Btn>
 				</Content>

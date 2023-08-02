@@ -16,7 +16,7 @@ export const initialState: InitialState = {
 	isLoading: false,
 	error: '',
 };
-export const beersSlice = createSlice({
+export const constructorSlice = createSlice({
 	name: 'beers',
 	initialState,
 	reducers: {
@@ -43,6 +43,4 @@ export const beersSlice = createSlice({
 	},
 });
 
-export const { beersFetching, allBeersLengthFetchingSuccess, beersFetchingError } = beersSlice.actions;
-
-export default beersSlice.reducer;
+export const { actions: beersActions, reducer: beersReducer } = constructorSlice;

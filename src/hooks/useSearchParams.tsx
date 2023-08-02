@@ -1,9 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import moment from 'moment';
-
 import { IGetParams } from '../modules/service';
-import { IFiltersValue } from '../modules/filters';
 
 export const useSearchParams = () => {
 	const [params, setParams] = useState<IGetParams>({

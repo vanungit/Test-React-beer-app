@@ -1,8 +1,11 @@
-import beersReducer, { allBeersLengthFetchingSuccess, beersFetching, initialState, beersFetchingError } from './BeersSlice';
+// import { allBeersLengthFetchingSuccess, beersFetching, initialState, beersFetchingError, BeersReducer } from './BeersSlice';
+import { initialState } from './BeersSlice';
+
+import { beersActions, beersReducer } from './BeersSlice';
 
 describe('testing beers reducer', () => {
 	it('testing beersFetching action', () => {
-		expect(beersReducer(initialState, beersFetching())).toEqual({
+		expect(beersReducer(initialState, beersActions.beersFetching())).toEqual({
 			beers: [],
 			beerDetails: null,
 			allBeersLength: 0,
@@ -11,7 +14,7 @@ describe('testing beers reducer', () => {
 		});
 	});
 	it('testing beersFetchingError action', () => {
-		expect(beersReducer(initialState, beersFetchingError('error'))).toEqual({
+		expect(beersReducer(initialState, beersActions.beersFetchingError('error'))).toEqual({
 			beers: [],
 			beerDetails: null,
 			allBeersLength: 0,
@@ -20,7 +23,7 @@ describe('testing beers reducer', () => {
 		});
 	});
 	it('testing beers action allBeersLengthFetchingSuccess', () => {
-		expect(beersReducer(initialState, allBeersLengthFetchingSuccess(12))).toEqual({
+		expect(beersReducer(initialState, beersActions.allBeersLengthFetchingSuccess(12))).toEqual({
 			beers: [],
 			beerDetails: null,
 			allBeersLength: 12,
