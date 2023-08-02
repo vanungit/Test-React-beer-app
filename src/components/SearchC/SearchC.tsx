@@ -1,19 +1,24 @@
 import React from 'react';
+import _debounce from 'lodash/debounce';
 
-import { Input, InputRef } from 'antd';
-import { SearchProps } from 'antd/es/input/Search';
-
-const { Search } = Input;
+import { Input } from 'antd';
 
 interface Props {
 	handleSearch(values: any): void;
-	searchClass: string;
+	searchClass: string | undefined;
 }
 const SearchC: React.FC<Props> = props => {
 	const { handleSearch, searchClass, ...rest } = props;
+
+	const handleDebounceFn = (e: React.ChangeEvent<HTMLInputElement>) => {
+		handleSearch(e.target.value);
+	};
+
+	const debounceFn = React.useCallback(_debounce(handleDebounceFn, 600), []);
+
 	return (
 		<>
-			<Search placeholder='Name here' className={searchClass} {...rest} onSearch={handleSearch} />
+			<Input placeholder='Name here' className={searchClass} {...rest} onChange={debounceFn} />
 		</>
 	);
 };

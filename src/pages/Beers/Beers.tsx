@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Pagination, Layout } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 
@@ -20,14 +20,24 @@ const { Content } = Layout;
 
 export const Beers = () => {
 	const dispatch = useAppDispatch();
-	const { handleSearch, handleShow, setParams, setPagination, showFilters, currentPage, params } = useSearchParams();
-
 	const { beers, allBeersLength, isLoading } = useAppSelector(getBeersSelector);
+
+	const [showFilters, setShowFilters] = useState(false);
+
+	const { handleSearch, setParams, setPagination, currentPage, params } = useSearchParams();
 
 	useEffect(() => {
 		dispatch(fetchBeers(params));
 		dispatch(fetchAllBeersLength({ beer_name: params.beer_name, brewed_before: params.brewed_before, abv_gt: params.abv_gt }));
 	}, [params, dispatch]);
+
+	const handleShow = () => {
+		setShowFilters(prev => {
+			if (prev) {
+			}
+			return !prev;
+		});
+	};
 
 	return (
 		<>

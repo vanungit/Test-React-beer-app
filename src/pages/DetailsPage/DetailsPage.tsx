@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Redirect, useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Layout } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
@@ -15,7 +15,7 @@ const DetailsPage = () => {
 	const dispatch = useAppDispatch();
 	const history = useHistory();
 	const beerId: number = Number(useParams<{ id?: string }>().id);
-	const { beerDetails: beer, isLoading } = useAppSelector(getBeersSelector);
+	const { beerDetails: beer } = useAppSelector(getBeersSelector);
 
 	useEffect(() => {
 		dispatch(fetchBeerDetails(beerId));

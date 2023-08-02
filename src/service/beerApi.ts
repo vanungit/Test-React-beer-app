@@ -9,13 +9,13 @@ export const getBeers = async (params: IGetParams) => {
 		const fetchParams = getParams(params);
 		return await axios.get(`${apiUrl}/beers/`, { params: fetchParams });
 	} catch (e) {
-		// console.log('Fetching error');
+		return new Error((e as Error).message);
 	}
 };
 export const getBeerDetail = async (id: number) => {
 	try {
 		return await axios.get(`${apiUrl}/beers/${id}`);
 	} catch (e) {
-		// console.log('Fetching error');
+		return new Error((e as Error).message);
 	}
 };

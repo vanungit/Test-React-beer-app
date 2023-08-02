@@ -1,5 +1,4 @@
-import React from 'react';
-import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { Beers, DetailsPage } from '../pages';
 

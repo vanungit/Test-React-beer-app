@@ -4,35 +4,31 @@ import { IGetParams } from '../../../modules/service';
 
 import { beersActions } from './BeersSlice';
 
-export const fetchBeers = (params: IGetParams) => (dispatch: AppDispatch) => {
+export const fetchBeers = (params: IGetParams) => async (dispatch: AppDispatch) => {
 	try {
 		dispatch(beersActions.beersFetching());
-		(async () => {
-			const fetch = await getBeers(params);
-			if (fetch) dispatch(beersActions.beersFetchingSuccess(fetch.data));
-		})();
+		const fetch = await getBeers(params);
+		if (!(fetch instanceof Error)) dispatch(beersActions.beersFetchingSuccess(fetch.data));
 	} catch (e) {
 		dispatch(beersActions.beersFetchingError('fetching error'));
 	}
 };
-export const fetchBeerDetails = (id: number) => (dispatch: AppDispatch) => {
+export const fetchBeerDetails = (id: number) => async (dispatch: AppDispatch) => {
 	try {
 		dispatch(beersActions.beersFetching());
-		(async () => {
-			const fetch = await getBeerDetail(id);
-			if (fetch) dispatch(beersActions.beerDetailsFetchingSuccess(fetch.data[0]));
-		})();
+
+		const fetch = await getBeerDetail(id);
+		if (!(fetch instanceof Error)) dispatch(beersActions.beerDetailsFetchingSuccess(fetch.data[0]));
 	} catch (e) {
 		dispatch(beersActions.beersFetchingError('fetching error'));
 	}
 };
-export const fetchAllBeersLength = (params: IGetParams) => (dispatch: AppDispatch) => {
+export const fetchAllBeersLength = (params: IGetParams) => async (dispatch: AppDispatch) => {
 	try {
 		dispatch(beersActions.beersFetching());
-		(async () => {
-			const fetch = await getBeers(params);
-			if (fetch) dispatch(beersActions.allBeersLengthFetchingSuccess(fetch.data.length));
-		})();
+
+		const fetch = await getBeers(params);
+		if (!(fetch instanceof Error)) dispatch(beersActions.allBeersLengthFetchingSuccess(fetch.data.length));
 	} catch (e) {
 		dispatch(beersActions.beersFetchingError('fetching error'));
 	}

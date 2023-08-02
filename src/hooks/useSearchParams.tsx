@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import { IGetParams } from '../modules/service';
 
@@ -10,14 +10,12 @@ export const useSearchParams = () => {
 		brewed_before: null,
 		abv_gt: null,
 	});
-	const [showFilters, setShowFilters] = useState<boolean>(false);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	const handleSearch = useCallback((name: string) => {
 		setParams((prev: IGetParams) => {
 			return { ...prev, beer_name: name, brewed_before: null, abv_gt: null };
 		});
-		setShowFilters(false);
 	}, []);
 
 	const setPagination = useCallback((value: number) => {
@@ -27,7 +25,5 @@ export const useSearchParams = () => {
 		setCurrentPage(value);
 	}, []);
 
-	const handleShow = useCallback(() => setShowFilters(prev => !prev), []);
-
-	return { handleSearch, handleShow, setPagination, setParams, showFilters, currentPage, params };
+	return { handleSearch, setPagination, setParams, currentPage, params };
 };
