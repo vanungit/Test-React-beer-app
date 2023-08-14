@@ -4,7 +4,7 @@ import _debounce from 'lodash/debounce';
 import { Input } from 'antd';
 
 interface Props {
-	handleSearch(values: any): void;
+	handleSearch(values: string): void;
 	searchClass: string | undefined;
 }
 const SearchC: React.FC<Props> = props => {

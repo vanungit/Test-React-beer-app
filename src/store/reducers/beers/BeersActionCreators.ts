@@ -23,7 +23,7 @@ export const fetchBeerDetails = (id: number) => async (dispatch: AppDispatch) =>
 		dispatch(beersActions.beersFetchingError('fetching error'));
 	}
 };
-export const fetchAllBeersLength = (params: IGetParams) => async (dispatch: AppDispatch) => {
+export const fetchAllBeersLength = (params: Omit<IGetParams, 'per_page' | 'page'>) => async (dispatch: AppDispatch) => {
 	try {
 		dispatch(beersActions.beersFetching());
 

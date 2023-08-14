@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Pagination, Layout } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 
@@ -38,6 +38,18 @@ export const Beers = () => {
 			return !prev;
 		});
 	};
+	const beersList = useMemo((): JSX.Element => {
+		if (isLoading) {
+			return <div className={styles.loading}>Loading... </div>;
+		}
+		return (
+			<Content className={styles.listContainer}>
+				{beers.map((element: IBeers, index: number) => (
+					<BeersList element={element} key={index} />
+				))}
+			</Content>
+		);
+	}, [isLoading, beers]);
 
 	return (
 		<>
@@ -49,12 +61,7 @@ export const Beers = () => {
 					</Btn>
 				</Content>
 				<ConnectedForm dataTestid='toggle-filters' showFilters={showFilters} setParams={setParams} />
-				{isLoading && <div className={styles.loading}>Loading... </div>}
-				<Content className={styles.listContainer}>
-					{beers.map((element: IBeers, index: number) => (
-						<BeersList element={element} key={index} />
-					))}
-				</Content>
+				{beersList}
 				{allBeersLength >= 1 && <Pagination onChange={setPagination} current={currentPage} defaultCurrent={1} total={allBeersLength - 1} />}
 			</div>
 		</>

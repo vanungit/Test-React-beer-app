@@ -4,7 +4,12 @@ import { DatePicker, Form, InputNumber, Space } from 'antd';
 import { IFiltersValue } from '../../modules/filters';
 import Btn from '../Btn/Btn';
 
-const Filters: React.FC<any> = ({ onSubmitForm, dataTestid }) => {
+interface IFilterProps {
+	onSubmitForm: (val: IFiltersValue) => void;
+	dataTestid: string;
+}
+
+const Filters: React.FC<IFilterProps> = ({ onSubmitForm, dataTestid }) => {
 	const onFinish = (values: IFiltersValue) => onSubmitForm(values);
 
 	return (

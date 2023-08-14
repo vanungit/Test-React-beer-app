@@ -1,8 +1,8 @@
 import { IGetParams } from '../../modules/service';
 
-export function getParams(params: IGetParams) {
+export function getParams(params: Partial<IGetParams>) {
 	const urlParams = new URLSearchParams();
-	Object.entries(params).forEach((param) => {
+	Object.entries(params).forEach(param => {
 		if (param[1]) {
 			urlParams.append(param[0], `${param[1]}`);
 		}
