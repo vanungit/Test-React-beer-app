@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Pagination, Layout } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
-import { Spin, Empty } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchAllBeersLength, fetchBeers } from '../../store/reducers/beers/BeersActionCreators';
@@ -41,14 +40,7 @@ export const Beers = () => {
 	};
 	const beersList = useMemo((): JSX.Element => {
 		if (isLoading) {
-			return (
-				<div className={styles.loading}>
-					<Spin size='large' />
-				</div>
-			);
-		}
-		if (beers.length === 0) {
-			return <Empty />;
+			return <div className={styles.loading}>Loading... </div>;
 		}
 		return (
 			<Content className={styles.listContainer}>
@@ -61,7 +53,7 @@ export const Beers = () => {
 
 	return (
 		<>
-			<Content className={styles.mainPage} data-testid='beers-page'>
+			<div className={styles.mainPage} data-testid='beers-page'>
 				<Content key='search-content'>
 					<SearchC data-testid='search-input' handleSearch={handleSearch} searchClass={styles.searchName} />
 					<Btn data-testid='toggle-btn' style={{ marginTop: '4px' }} onClick={handleShow} className={styles.searchName}>
@@ -74,7 +66,6 @@ export const Beers = () => {
 					<Pagination onChange={setPagination} current={currentPage} defaultCurrent={1} total={allBeersLength - 1} />
 				)}
 			</Content>
-			<div>dasdsa</div>
 		</>
 	);
 };
